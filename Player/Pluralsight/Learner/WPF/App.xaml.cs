@@ -155,7 +155,7 @@ public partial class App : Application, ISingleInstanceApp
     {
         if (isFirstRunningInstance)
         {
-            ObjectFactory.Get<ITracking>().TrackFinalEvent(Event.AppClosed);
+            //ObjectFactory.Get<ITracking>().TrackFinalEvent(Event.AppClosed);
             SingleInstance<App>.Cleanup();
         }
     }
