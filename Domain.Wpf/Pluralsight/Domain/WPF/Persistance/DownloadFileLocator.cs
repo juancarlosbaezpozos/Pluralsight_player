@@ -106,7 +106,7 @@ public class DownloadFileLocator : IDownloadFileLocator
         }
     }
 
-    string FixName(string name)
+    private string FixName(string name)
     {
         var illegal = name;
         var invalid = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());

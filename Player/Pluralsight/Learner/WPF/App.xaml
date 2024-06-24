@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application x:Class="Pluralsight.Learner.WPF.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:Pluralsight.Learner.WPF">
-  <Application.Resources>
-    <ResourceDictionary>
-      <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="ProgressRing.xaml" />
-        <ResourceDictionary Source="Themes/Generic.xaml" />
-        <ResourceDictionary Source="Resources/VectorImages.xaml" />
-      </ResourceDictionary.MergedDictionaries>
-    </ResourceDictionary>
-  </Application.Resources>
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ProgressRing.xaml" />
+                <ResourceDictionary Source="Themes/Generic.xaml" />
+                <ResourceDictionary Source="Resources/VectorImages.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>

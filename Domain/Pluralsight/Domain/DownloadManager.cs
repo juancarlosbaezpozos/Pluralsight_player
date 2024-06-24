@@ -22,6 +22,8 @@ public class DownloadManager : IDownloadQueue
 
     private readonly CourseImageDownloader imageDownloader;
 
+    private readonly TranscriptSrtDownloader srtDownloader;
+
     private readonly TranscriptDownloader transcriptDownloader;
 
     private readonly IProgress<CourseProgressUpdate> courseProgressUpdated;
@@ -51,6 +53,7 @@ public class DownloadManager : IDownloadQueue
         courseDownloadProgress = new ConcurrentDictionary<CourseDetail, int>();
         imageDownloader = new CourseImageDownloader(fileLocator);
         transcriptDownloader = new TranscriptDownloader(restHelper, transcriptRepository, settingsRepository, courseRepository);
+        srtDownloader = new TranscriptSrtDownloader(fileLocator, transcriptRepository);
         courseProgressUpdated = new Progress<CourseProgressUpdate>();
         queueProgressUpdated = new Progress<QueueProgressUpdate>();
         clipsDownloadQueue = new ConcurrentQueue<ClipDownloader>();
@@ -124,6 +127,7 @@ public class DownloadManager : IDownloadQueue
             transcriptDownloader.DownloadCourseTranscripts(new List<CourseDetail> { course }),
             StartOrContinueDownloading()
         });
+        await Task.WhenAll(srtDownloader.Generate(course));
     }
 
     private async Task StartOrContinueDownloading()
