@@ -12,7 +12,8 @@ public class DownloadFileLocator : IDownloadFileLocator
 {
     public FileInfo GetClipFileInfo(CourseDetail course, Module module, Clip clip)
     {
-        return new FileInfo(string.Concat(GetFolderForCourseDownloads(course) + "\\" + GetModuleHash(module), "\\", clip.Name, ".psv"));
+        var clipName = FixName($"{clip.Index} - {clip.Title}");
+        return new FileInfo(string.Concat(GetFolderForCourseDownloads(course) + "\\" + GetModuleHash(module), "\\", clipName, ".mp4"));
     }
 
     public string GetFilenameForCourseImage(CourseDetail course)
@@ -56,14 +57,14 @@ public class DownloadFileLocator : IDownloadFileLocator
 
     public string GetFolderForCourseDownloads(CourseDetail course)
     {
-        return Path.Combine(GetFolderForCoursesDownloads(), course.Name);
+        var name = FixName(course.Title);
+        return Path.Combine(GetFolderForCoursesDownloads(), name);
     }
 
     private string GetModuleHash(Module module)
     {
-        string s = module.Name + "|" + module.AuthorHandle;
-        using MD5 mD = MD5.Create();
-        return Convert.ToBase64String(mD.ComputeHash(Encoding.UTF8.GetBytes(s))).Replace('/', '_');
+        var name = FixName(module.Title);
+        return name.Trim();
     }
 
     public bool IsCourseDownloadComplete(CourseDetail course)
@@ -103,5 +104,18 @@ public class DownloadFileLocator : IDownloadFileLocator
         {
             return false;
         }
+    }
+
+    string FixName(string name)
+    {
+        var illegal = name;
+        var invalid = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
+
+        foreach (char c in invalid)
+        {
+            illegal = illegal.Replace(c.ToString(), "");
+        }
+
+        return illegal;
     }
 }

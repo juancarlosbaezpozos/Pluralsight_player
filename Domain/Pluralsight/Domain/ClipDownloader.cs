@@ -46,7 +46,7 @@ public class ClipDownloader
         {
             return true;
         }
-        DownloadForOfflineRequest request = new DownloadForOfflineRequest
+        DownloadForOfflineRequest request = new()
         {
             CourseId = ClipDownloadInfo.Course.Name,
             ClipId = ClipDownloadInfo.Clip.Name,
@@ -122,7 +122,6 @@ public class ClipDownloader
             int num = await stream.ReadAsync(buffer, 0, buffer.Length);
             while (num > 0 && !currentDownloadCancelled)
             {
-                VideoEncryption.EncryptBuffer(buffer, num, position);
                 position += num;
                 fileStream.Write(buffer, 0, num);
                 num = await stream.ReadAsync(buffer, 0, buffer.Length);

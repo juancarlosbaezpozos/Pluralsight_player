@@ -26,7 +26,7 @@ public class VirtualFileCache : IDisposable
         {
             encryptedVideoFile.Seek(offset, SeekOrigin.Begin);
             int num = encryptedVideoFile.Read(pv, 0, count);
-            VideoEncryption.DecryptBuffer(pv, num, offset);
+
             if (IntPtr.Zero != pcbRead)
             {
                 Marshal.WriteIntPtr(pcbRead, new IntPtr(num));

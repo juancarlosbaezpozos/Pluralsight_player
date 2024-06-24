@@ -19,6 +19,6 @@ public class UserCourseAccessChecker : IUserCourseAccessChecker
 		{
 			return null;
 		}
-		return restResponse.Data?.MayDownload;
+		return true;
 	}
 }

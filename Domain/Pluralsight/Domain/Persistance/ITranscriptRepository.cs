@@ -2,9 +2,9 @@ namespace Pluralsight.Domain.Persistance;
 
 public interface ITranscriptRepository
 {
-	bool SaveTranscriptsForCourse(CourseTranscriptDto courseTranscripts, string courseSlug);
+    bool SaveTranscriptsForCourse(CourseTranscriptDto courseTranscripts, string courseSlug);
 
-	ClipTranscript[] LoadTranscriptForClip(string courseName, string moduleName, int clipIndex);
+    ClipTranscript[] LoadTranscriptForClip(string courseName, string moduleName, int clipIndex);
 
-	bool TranscriptsAreSaved(string courseName);
+    bool TranscriptsAreSaved(string courseName);
 }
