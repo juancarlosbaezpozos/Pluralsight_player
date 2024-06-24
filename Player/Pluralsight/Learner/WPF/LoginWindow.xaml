@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window x:Class="Pluralsight.Learner.WPF.LoginWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:Pluralsight.Learner.WPF" Background="{StaticResource darkBackgroundBrush}" Title="Pluralsight Offline Player" Height="400" Width="525" ResizeMode="CanMinimize">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <BitmapImage x:Key="Logo" UriSource="Resources/ps-logo-outline.png" />
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <Grid>
+    <Grid Name="SignInGrid" Background="{StaticResource darkBackgroundBrush}">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+      <DockPanel Name="LoginErrorBanner" Grid.Row="0" Background="#E31F26" Visibility="Collapsed" Height="32" VerticalAlignment="Top">
+        <TextBlock Name="LoginErrorText" Foreground="#FFFFFFFF" FontSize="14" TextAlignment="Center" FontWeight="SemiBold" Text="Invalid username or password" VerticalAlignment="Center" />
+      </DockPanel>
+      <Image Grid.Row="1" Source="Resources/ps-logo.png" Margin="30" Width="280" />
+      <Grid Row="2" Width="280">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label Margin="6,0" Foreground="#FFFFFFFF" Grid.Row="0">Username or Email</Label>
+        <TextBox Name="userNameTextbox" Margin="10,0" Grid.Row="1" Padding="8" TextChanged="CheckSignInEnabled" />
+        <Label Margin="6,0" Foreground="#FFFFFFFF" Grid.Row="2">Password</Label>
+        <PasswordBox Name="passwordBox" Margin="10,0" Grid.Row="3" Padding="8" PasswordChanged="PasswordSignInEnabled" />
+        <Grid Row="4">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+          <Button Name="loginButton" Grid.Column="0" IsEnabled="False" Margin="10" Width="50" Height="32" HorizontalAlignment="Left" Style="{StaticResource orangeButtonStyle}" IsDefault="True" VerticalAlignment="Center" Click="Login">Sign In</Button>
+          <TextBlock Grid.Column="1" VerticalAlignment="Center" TextAlignment="Right" Margin="10">
+            <Hyperlink Style="{StaticResource orangeHyperlink}" Click="ForgotPasswordClicked">Forgot Password?</Hyperlink>
+          </TextBlock>
+        </Grid>
+        <local:ProgressRing x:Name="LoginProgress" Grid.Row="4" IsActive="True" Visibility="Collapsed" Foreground="{StaticResource psOrangeDarkBrush}" />
+      </Grid>
+      <TextBlock Grid.Row="3" Margin="0,10" TextAlignment="Center">
+        <Hyperlink Style="{StaticResource orangeHyperlink}" Click="AlternateSignInClicked">Sign in using a Company, School, or Digital-Tutors account</Hyperlink>
+      </TextBlock>
+    </Grid>
+    <StackPanel Name="AlternateSignInGrid" Background="{StaticResource darkBackgroundBrush}" Visibility="Hidden" VerticalAlignment="Center" HorizontalAlignment="Center">
+      <TextBlock Foreground="#FFFFFFFF" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Go to:" />
+      <TextBlock FontSize="20" Margin="0,10,0,40" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Hyperlink Style="{StaticResource orangeHyperlink}" Click="AuthUrlClicked">https://pluralsight.com/auth</Hyperlink>
+      </TextBlock>
+      <TextBlock Foreground="#FFFFFFFF" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Enter this code:" />
+      <TextBlock Name="DevicePin" Margin="0,10" Foreground="#FFFFFFFF" FontSize="50" VerticalAlignment="Center" HorizontalAlignment="Center" Text="" />
+      <StackPanel Name="MinutesTillExpiresMessage" Margin="0,10" Orientation="Horizontal" HorizontalAlignment="Center">
+        <TextBlock Foreground="#FFFFFFFF" Text="Code expires in " />
+        <TextBlock Name="MinutesTillExpires" Foreground="#FFFFFFFF" Text="15 minutes" />
+      </StackPanel>
+      <TextBlock Name="CodeExpiredMessage" Margin="0,10" Foreground="#FFFF0000" HorizontalAlignment="Center" Text="Code expired" Visibility="Collapsed" />
+      <TextBlock Margin="0,10" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Hyperlink Style="{StaticResource orangeHyperlink}" Click="NeedHelpClicked">Need help?</Hyperlink>
+      </TextBlock>
+      <Button Name="GenerateNewCodeButton" Margin="0,10" Width="150" Height="32" HorizontalAlignment="Center" Visibility="Collapsed" Style="{StaticResource orangeButtonStyle}" Click="GenerateNewCodeClicked">Generate a new code</Button>
+      <Button Width="60" Height="32" HorizontalAlignment="Center" Style="{StaticResource orangeButtonStyle}" Click="CancelAlternateSignIn">Cancel</Button>
+    </StackPanel>
+  </Grid>
+</Window>

@@ -1,0 +1,67 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <AssemblyName>Pluralsight</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <OutputType>WinExe</OutputType>
+    <UseWPF>True</UseWPF>
+    <TargetFramework>net472</TargetFramework>
+    <Prefer32Bit>True</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>11.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <RootNamespace />
+    <StartupObject>Pluralsight.Learner.WPF.App</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="app.config" />
+    <None Remove="ps-offline-player-windows-app-icon.ico" />
+    <None Remove="resources\ps-logo-outline.png" />
+    <None Remove="resources\keyboard-shortcuts.png" />
+    <None Remove="resources\ps-logo.png" />
+    <Content Include="app.config" />
+    <EmbeddedResource Include="ps-offline-player-windows-app-icon.ico" LogicalName="ps-offline-player-windows-app-icon.ico" />
+    <EmbeddedResource Include="resources\ps-logo-outline.png" LogicalName="resources/ps-logo-outline.png" />
+    <EmbeddedResource Include="resources\keyboard-shortcuts.png" LogicalName="resources/keyboard-shortcuts.png" />
+    <EmbeddedResource Include="resources\ps-logo.png" LogicalName="resources/ps-logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Jot" Version="2.1.11" />
+    <PackageReference Include="NLog" Version="4.7.11" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain.Wpf\Pluralsight.Domain.WPF.csproj" />
+    <ProjectReference Include="..\Domain\Pluralsight.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Analytics">
+      <HintPath>..\References\Analytics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="BoxedAppSDK.Managed">
+      <HintPath>..\References\BoxedAppSDK.Managed.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NuGet.Squirrel">
+      <HintPath>..\References\NuGet.Squirrel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="Splat">
+      <HintPath>..\References\Splat.dll</HintPath>
+    </Reference>
+    <Reference Include="Squirrel">
+      <HintPath>..\References\Squirrel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+</Project>
