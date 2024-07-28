@@ -25,11 +25,11 @@ public class TranscriptSrtDownloader
         {
             foreach (Module module in course.Modules)
             {
-                List<TranscriptEntry> transcriptEntries = new();
+                List<TranscriptEntry> transcriptEntries = new List<TranscriptEntry>();
                 foreach (Clip clip in module.Clips)
                 {
                     var clipTranscripts = transcriptRepository.LoadTranscriptForClip(course.Name, module.Name, clip.Index);
-                    if (clipTranscripts.Any())
+                    if (clipTranscripts.Count() > 0)
                     {
                         for (int i = 0; i < clipTranscripts.Count(); i++)
                         {
@@ -52,11 +52,14 @@ public class TranscriptSrtDownloader
                             entryIndex++;
                         }
 
-                        var srtFileName =  FixName($"{clip.Index} - {clip.Title}.srt");
+                        var srtFileName = FixName($"{clip.Index} - {clip.Title}.srt");
                         var clipInfo = downloadLocator.GetClipFileInfo(course, module, clip);
                         var directoryLocation = clipInfo.DirectoryName;
 
                         File.WriteAllText(Path.Combine(directoryLocation, srtFileName), srtContent.ToString());
+
+                        transcriptEntries.Clear();
+                        srtContent.Clear();
                     }
                 }
             }
